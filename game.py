@@ -1,11 +1,12 @@
-# from colorama import init, Back
+from colorama import Back
 import random
 from words import word_list
 
-# init()
-def get_word(word_list):
-    to_guess = random.choice(word_list)
-    return to_guess
+def create_game(word_list):
+    return {
+        "word": random.choice(word_list),
+        "guesses": 6
+    }
 
 
 def evaluate_guess(to_guess, guessed):
@@ -28,16 +29,16 @@ def main():
         if start_input == "no":
             break
         elif start_input == "yes":
-            round_count = 0
-            to_guess = get_word(word_list)
+            game = create_game(word_list)
+
             print("Enter a word of 5 letters")
-            while round_count < 6:
+            while game['guesses'] > 0:
                 guessed = input()
-                print(evaluate_guess(to_guess, guessed))
-                if guessed == to_guess:
+                print(Back.GREEN + evaluate_guess(game['word'], guessed))
+                if guessed == game['word']:
                     print("You guessed correctly!")
                     break
-                round_count = round_count + 1
+                game['guesses'] -= 1
         else:
             print(
                 "You had a typo. Would you like to start a new game? Type 'yes' to start, type 'no' to exit."
