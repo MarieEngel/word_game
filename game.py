@@ -4,12 +4,12 @@ from word_game.words import word_list
 
 #init()
 
-loop = not None
+loop = True
 while loop:
     print("Would you like to start a new game? Type 'yes' to start, type 'no' to exit.")
     start_input = input()
     if start_input == "no":
-        loop = None
+        loop = False
     elif start_input == 'yes':
         round_count = 0
         word_list_trial = ["cigar"]
